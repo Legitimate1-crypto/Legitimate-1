@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legitimate Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tonconnect.network/tonconnect.js"></script>
+    <link rel="manifest" href="manifest.json"> <!-- Link to the manifest file -->
+    <style>
+        .welcome {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* Stack image and text vertically */
+            height: 100vh;
+            font-size: 40px;
+            color: #333;
+            background-color: #f0f0f0;
+            position: absolute;
+            width: 100%
+            top: 0;
+            left: 0;
+            transition: opacity 0.5s;
+        }
+
+        #welcomeImage {
+            max-width: 80%; /* Adjust the size of the image */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space between image and text */
+        }
+
+        .container {
+            display: none; /* Hide main content initially */
+            text-align: center;
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome" id="welcomeScreen">
+        <img src="path/to/your/image.png" alt="Welcome Image" id="welcomeImage"> <!-- Replace with your image path -->
+        Welcome to Legitimate
+    </div>
+    
+    <div class="container" id="gameContainer">
+        <h1>Legitimate Game</h1>
+        <button id="tapButton">Tap to Earn Points</button>
+        <p id="points">Points: 0</p>
+        <button id="connectWalletButton">Connect TON Wallet</button>
+        <button id="toggleDarkMode">Toggle Dark Mode</button>
+    </div>
+
+    <script>
+        let points = 0;
+
+        // Show the welcome screen for a few seconds
+        setTimeout(() => {
+            document.getElementById('welcomeScreen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('welcomeScreen').style.display = 'none'; // Hide welcome screen
+                document.getElementById('gameContainer').style.display = 'block'; // Show game container
+            }, 500);
+        }, 2000); // Duration for the welcome message
+
+        // Tap button functionality
+        document.getElementById('tapButton').addEventListener('click', function() {
+            points += 1;
+            document.getElementById('points').innerText = 'Points: ' + points;
+        });
+
+        // Wallet connection functionality
+        document.getElementById('connectWalletButton').addEventListener('click', async () => {
+            try {
+                const tonConnect = new TonConnect({ manifestUrl: "https://yourusername.github.io/yourrepo/manifest.json" }); // Replace with your actual manifest URL
+                const connection = await tonConnect.connect();
+                console.log("Connected:", connection);
+            } catch (error) {
+                console.error("Failed to connect:", error);
+            }
+        });
+
+        // Dark mode functionality
+        document.getElementById('toggleDarkMode').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
+

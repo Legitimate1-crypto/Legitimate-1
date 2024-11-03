@@ -1,0 +1,16 @@
+{
+  "name": "legitimate",
+  "version": "1.0.0",
+  "description": "A tap-to-earn game on the TON blockchain.",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
